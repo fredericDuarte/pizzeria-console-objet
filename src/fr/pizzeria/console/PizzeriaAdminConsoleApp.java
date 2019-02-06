@@ -59,13 +59,15 @@ public class PizzeriaAdminConsoleApp {
 				String nom = choixUser.next();
 				System.out.println("Veuillez saisir le prix :");
 				double prix = choixUser.nextDouble();
+				
 				Pizza[] arrayTemp = new Pizza[array.length + 1] ;
-
+				//copie liste vers temps
 				for (int i = 0; i < array.length; i++) {
 					arrayTemp[i] = array[i];
 				}
-		
+		        //ajout news vers temp qui contient liste
 				arrayTemp[array.length] = new Pizza(code, nom, prix);
+				// copie temps vers liste
 				array = arrayTemp;
 				break;
 				
