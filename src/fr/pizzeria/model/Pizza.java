@@ -2,10 +2,10 @@ package fr.pizzeria.model;
 
 public class Pizza {
 	
-	int id;
-	String code;
-	String libbelle;
-	double prix;
+	public int id;
+	public String code;
+	public String libbelle;
+	public double prix;
 	
 	public Pizza(String code, String libbelle, double prix) {
 		super();
@@ -20,6 +20,12 @@ public class Pizza {
 		this.libbelle = libbelle;
 		this.prix = prix;
 	}
+	@Override
+	public String toString() {
+		return  code + "-> " + libbelle + "(" + prix  + ")";
+	}
+	public void affiche() {
+		System.out.println( code + "-> " + libbelle + "(" + prix  + ")");
+	}
 	
-
 }
