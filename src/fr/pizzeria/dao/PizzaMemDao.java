@@ -1,58 +1,53 @@
 package fr.pizzeria.dao;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import fr.pizzeria.model.Pizza;
 
 public class PizzaMemDao implements IPizzaDao {
 
-	public Pizza[] array;
+	List<Pizza> listPizza;
+	Iterator<Pizza> iterator;
 	Pizza[] arrayTemp;
 
 	public PizzaMemDao() {
 		/* Définiions des pizzas */
-		array = new Pizza[8];
-		array[0] = new Pizza(0, "PEP", "Pépéroni", 12.50);
-		array[1] = new Pizza(1, "MAR", "Margherita", 14.00);
-		array[2] = new Pizza(2, "REIN", "La Reine", 11.50);
-		array[3] = new Pizza(3, "FRO", "La 4 fromages", 12.00);
-		array[4] = new Pizza(4, "CAN", "La cannibale", 12.50);
-		array[5] = new Pizza(5, "SAV", "La savoyarde", 13.00);
-		array[6] = new Pizza(6, "ORI", "L’orientale", 13.50);
-		array[7] = new Pizza(7, "IND", "L’indienne", 14.00);
+		listPizza = new ArrayList<Pizza>();
+		listPizza.add(new Pizza(0, "PEP", "Pépéroni", 12.50));
+		listPizza.add(new Pizza(1, "MAR", "Margherita", 14.00));
+		listPizza.add(new Pizza(2, "REIN", "La Reine", 11.50));
+		listPizza.add(new Pizza(3, "FRO", "La 4 fromages", 12.00));
+		listPizza.add(new Pizza(4, "CAN", "La cannibale", 12.50));
+		listPizza.add(new Pizza(5, "SAV", "La savoyarde", 13.00));
+		listPizza.add(new Pizza(6, "ORI", "L’orientale", 13.50));
+		listPizza.add(new Pizza(7, "IND", "L’indienne", 14.00));
 
 	}
 
 	@Override
-	public Pizza[] findAllPizzas() {
+	public List<Pizza> findAllPizzas() {
 
-		return array;
+		return listPizza;
 	}
 
 	@Override
 	public void saveNewPizza(Pizza pizza) {
 
-		arrayTemp = new Pizza[array.length + 1];
-		// copie la liste
-		for (int i = 0; i < array.length; i++) {
-			arrayTemp[i] = array[i];
-		}
-		// ajoute un nouveau pizza dans le tableau temporaire qui contient liste
-		arrayTemp[array.length] = pizza;
-		// récupére la nouvelle liste
-		array = arrayTemp;
+		listPizza.add(pizza);
 
 	}
 
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
 
-		for (int i = 0; i < array.length; i++) {
-
-			if (array[i].getCode().equals(codePizza)) {
-
-				array[i].setCode(pizza.getCode());
-				array[i].setLibbelle(pizza.getLibbelle());
-				array[i].setPrix(pizza.getPrix());
-			}
+		for (int i = 0; i < listPizza.size(); i++) {
+			Pizza pizzo = (Pizza) listPizza.get(i);
+			if (pizzo.getCode().equals(codePizza))
+				listPizza.get(i).setCode(codePizza);
+			listPizza.get(i).setLibbelle(pizzo.getLibbelle());
+			listPizza.get(i).setPrix(pizzo.getPrix());
 
 		}
 
@@ -61,27 +56,22 @@ public class PizzaMemDao implements IPizzaDao {
 	@Override
 	public void deletePizza(String codePizza) {
 
-		arrayTemp = new Pizza[array.length - 1];
-		int iTemp = 0;
-		// copie la liste sauf pour le pizza demandé
-		for (int i = 0; i < array.length; i++) {
-			if (!array[i].getCode().equals(codePizza)) {
-				arrayTemp[iTemp] = array[i];
-				iTemp++;
-			}
+		for (int i = 0; i < listPizza.size(); i++) {
+			Pizza pizzo = (Pizza) listPizza.get(i);
+			if (pizzo.getCode().equals(codePizza))
+				listPizza.remove(i);
 		}
-		// récupére la nouvelle liste
-		array = arrayTemp;
 
 	}
 
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
 		Pizza pizzaFind = new Pizza(null, null, 0);
-		for (int i = 0; i < array.length; i++) {
 
-			if (array[i].getCode().equals(codePizza))
-				pizzaFind = array[i];
+		iterator = listPizza.iterator();
+		while (iterator.hasNext()) {
+			if (iterator.next().getCode().equals(codePizza))
+				pizzaFind = (Pizza) iterator.next();
 
 		}
 		return pizzaFind;
@@ -91,11 +81,10 @@ public class PizzaMemDao implements IPizzaDao {
 	public boolean pizzaExists(String codePizza) {
 		boolean find = false;
 
-		for (int i = 0; i < array.length; i++) {
-
-			if (array[i].getCode().equals(codePizza))
+		iterator = listPizza.iterator();
+		while (iterator.hasNext()) {
+			if (iterator.next().getCode().equals(codePizza))
 				find = true;
-
 		}
 		return find;
 	}
