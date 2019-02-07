@@ -8,10 +8,10 @@ package fr.pizzeria.model;
 public class Pizza {
 
 	/* définitions des variables */
-	public int id;
-	public String code;
-	public String libbelle;
-	public double prix;
+	private int id;
+	private String code;
+	private String libbelle;
+	private double prix;
 
 	/**
 	 * constructeur avec paramétre
@@ -48,5 +48,31 @@ public class Pizza {
 	public void affiche() {
 		System.out.println(code + "-> " + libbelle + "(" + prix + ")");
 	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getLibbelle() {
+		return libbelle;
+	}
+
+	public void setLibbelle(String libbelle) {
+		this.libbelle = libbelle;
+	}
+
+	public double getPrix() {
+		return prix;
+	}
+
+	public void setPrix(double prix) {
+		this.prix = prix;
+	}
+	
+	
 
 }
