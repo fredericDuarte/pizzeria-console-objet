@@ -48,6 +48,8 @@ public class PizzaMemDao implements IPizzaDao {
 		for (int i = 0; i < array.length; i++) {
 
 			if (array[i].getCode().equals(codePizza)) {
+
+				array[i].setCode(pizza.getCode());
 				array[i].setLibbelle(pizza.getLibbelle());
 				array[i].setPrix(pizza.getPrix());
 			}

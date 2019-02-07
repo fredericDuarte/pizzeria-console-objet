@@ -1,7 +1,11 @@
 package fr.pizzeria.dao;
 
 import fr.pizzeria.model.Pizza;
-
+/**
+ * 
+ * @author F.Duarte
+ *
+ */
 public interface IPizzaDao {
 
 	Pizza[] findAllPizzas();
