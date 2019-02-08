@@ -8,21 +8,21 @@ import fr.pizzeria.model.Pizza;
 
 public class PizzaMemDao implements IPizzaDao {
 
-	List<Pizza> listPizza;
+	List<Pizza> listPizza = new ArrayList<Pizza>();
 	Iterator<Pizza> iterator;
 	Pizza[] arrayTemp;
 
 	public PizzaMemDao() {
 		/* Définiions des pizzas */
-		listPizza = new ArrayList<Pizza>();
-		listPizza.add(new Pizza(0, "PEP", "Pépéroni", 12.50));
-		listPizza.add(new Pizza(1, "MAR", "Margherita", 14.00));
-		listPizza.add(new Pizza(2, "REIN", "La Reine", 11.50));
-		listPizza.add(new Pizza(3, "FRO", "La 4 fromages", 12.00));
-		listPizza.add(new Pizza(4, "CAN", "La cannibale", 12.50));
-		listPizza.add(new Pizza(5, "SAV", "La savoyarde", 13.00));
-		listPizza.add(new Pizza(6, "ORI", "L’orientale", 13.50));
-		listPizza.add(new Pizza(7, "IND", "L’indienne", 14.00));
+
+		saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50));
+		saveNewPizza(new Pizza(1, "MAR", "Margherita", 14.00));
+		saveNewPizza(new Pizza(2, "REIN", "La Reine", 11.50));
+		saveNewPizza(new Pizza(3, "FRO", "La 4 fromages", 12.00));
+		saveNewPizza(new Pizza(4, "CAN", "La cannibale", 12.50));
+		saveNewPizza(new Pizza(5, "SAV", "La savoyarde", 13.00));
+		saveNewPizza(new Pizza(6, "ORI", "L’orientale", 13.50));
+		saveNewPizza(new Pizza(7, "IND", "L’indienne", 14.00));
 
 	}
 
@@ -66,12 +66,14 @@ public class PizzaMemDao implements IPizzaDao {
 
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
-		Pizza pizzaFind = new Pizza(null, null, 0);
+		Pizza pizzaFind = null;
 
 		iterator = listPizza.iterator();
 		while (iterator.hasNext()) {
-			if (iterator.next().getCode().equals(codePizza))
-				pizzaFind = (Pizza) iterator.next();
+			Pizza currentPizza = iterator.next();
+			if (currentPizza.getCode().equals(codePizza)) {
+				pizzaFind = (Pizza) currentPizza;
+			}
 
 		}
 		return pizzaFind;
@@ -83,7 +85,8 @@ public class PizzaMemDao implements IPizzaDao {
 
 		iterator = listPizza.iterator();
 		while (iterator.hasNext()) {
-			if (iterator.next().getCode().equals(codePizza))
+			Pizza currentPizza = iterator.next();
+			if (currentPizza.getCode().equals(codePizza))
 				find = true;
 		}
 		return find;
