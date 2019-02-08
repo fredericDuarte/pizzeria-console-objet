@@ -2,10 +2,23 @@ package fr.pizzeria.service;
 
 import fr.pizzeria.dao.*;
 
+/**
+ * Classe du menu service factory
+ * 
+ * @author F.DUarte
+ *
+ */
 public class MenuServiceFactory {
 
+	// définition
 	PizzaMemDao pizzaDao = new PizzaMemDao();
 
+	/**
+	 * Methodes du menu des différentes services
+	 * 
+	 * @param choixUser
+	 * @return MenuService
+	 */
 	public MenuService choixService(int choixUser) {
 
 		switch (choixUser) {

@@ -6,14 +6,22 @@ import java.util.List;
 
 import fr.pizzeria.model.Pizza;
 
+/**
+ * 
+ * @author F.Duarte
+ *
+ */
 public class PizzaMemDao implements IPizzaDao {
 
 	List<Pizza> listPizza = new ArrayList<Pizza>();
 	Iterator<Pizza> iterator;
 	Pizza[] arrayTemp;
 
+	/**
+	 * constructeuur
+	 */
 	public PizzaMemDao() {
-		/* Définiions des pizzas */
+		/* Ajouts des pizzas */
 
 		saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50));
 		saveNewPizza(new Pizza(1, "MAR", "Margherita", 14.00));
@@ -26,12 +34,22 @@ public class PizzaMemDao implements IPizzaDao {
 
 	}
 
+	/**
+	 * retourne la liste des pizzas
+	 * 
+	 * @return List<Pizza>
+	 */
 	@Override
 	public List<Pizza> findAllPizzas() {
 
 		return listPizza;
 	}
 
+	/**
+	 * Ajout un nouveau pizza dans la liste
+	 * 
+	 * @param Pizza
+	 */
 	@Override
 	public void saveNewPizza(Pizza pizza) {
 
@@ -39,6 +57,11 @@ public class PizzaMemDao implements IPizzaDao {
 
 	}
 
+	/**
+	 * Mettre à jour le pizza demandé
+	 * 
+	 * @param codePizza,pizza
+	 */
 	@Override
 	public void updatePizza(String codePizza, Pizza pizza) {
 
@@ -53,6 +76,11 @@ public class PizzaMemDao implements IPizzaDao {
 
 	}
 
+	/**
+	 * supprime un pizza demandé
+	 * 
+	 * @param codePizza
+	 */
 	@Override
 	public void deletePizza(String codePizza) {
 
@@ -64,6 +92,12 @@ public class PizzaMemDao implements IPizzaDao {
 
 	}
 
+	/**
+	 * retourne un objet pizza demandé par un code
+	 * 
+	 * @param codePizza
+	 * @return pizzaFind
+	 */
 	@Override
 	public Pizza findPizzaByCode(String codePizza) {
 		Pizza pizzaFind = null;
@@ -79,6 +113,12 @@ public class PizzaMemDao implements IPizzaDao {
 		return pizzaFind;
 	}
 
+	/**
+	 * Vérifie si le pizza demandé existe
+	 * 
+	 * @param codePizza
+	 * @return find
+	 */
 	@Override
 	public boolean pizzaExists(String codePizza) {
 		boolean find = false;

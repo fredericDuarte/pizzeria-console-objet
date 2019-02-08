@@ -5,12 +5,20 @@ import java.util.Scanner;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.dao.PizzaMemDao;
 import fr.pizzeria.model.Pizza;
-
+/**
+ * Classe pour modifier un pizza
+ * @author F.Duarte
+ *
+ */
 public class ModifierPizzaService extends MenuService {
 
 
 	String code;
-
+	/**
+	 * Execute le Methodes de la classe abstract MenuService
+	 * 
+	 * @param read , dao
+	 */
 	@Override
 	public void methodeUC(Scanner read, IPizzaDao dao) {
 
