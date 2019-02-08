@@ -3,6 +3,7 @@ package fr.pizzeria.service;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.exception.StockageException;
 
 /**
  * classe abstract pour executer les différentes dao
@@ -11,6 +12,6 @@ import fr.pizzeria.dao.IPizzaDao;
  */
 public abstract class MenuService {
 	
-	public abstract void methodeUC(Scanner read, IPizzaDao dao);
+	public abstract void methodeUC(Scanner read, IPizzaDao dao) throws StockageException;
 
 }

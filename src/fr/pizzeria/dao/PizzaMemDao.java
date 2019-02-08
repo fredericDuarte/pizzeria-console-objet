@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.exception.UpdatePizzaException;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -23,14 +26,20 @@ public class PizzaMemDao implements IPizzaDao {
 	public PizzaMemDao() {
 		/* Ajouts des pizzas */
 
-		saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50));
-		saveNewPizza(new Pizza(1, "MAR", "Margherita", 14.00));
-		saveNewPizza(new Pizza(2, "REIN", "La Reine", 11.50));
-		saveNewPizza(new Pizza(3, "FRO", "La 4 fromages", 12.00));
-		saveNewPizza(new Pizza(4, "CAN", "La cannibale", 12.50));
-		saveNewPizza(new Pizza(5, "SAV", "La savoyarde", 13.00));
-		saveNewPizza(new Pizza(6, "ORI", "L’orientale", 13.50));
-		saveNewPizza(new Pizza(7, "IND", "L’indienne", 14.00));
+		try {
+			saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50));
+			saveNewPizza(new Pizza(1, "MAR", "Margherita", 14.00));
+			saveNewPizza(new Pizza(2, "REIN", "La Reine", 11.50));
+			saveNewPizza(new Pizza(3, "FRO", "La 4 fromages", 12.00));
+			saveNewPizza(new Pizza(4, "CAN", "La cannibale", 12.50));
+			saveNewPizza(new Pizza(5, "SAV", "La savoyarde", 13.00));
+			saveNewPizza(new Pizza(6, "ORI", "L’orientale", 13.50));
+			saveNewPizza(new Pizza(7, "IND", "L’indienne", 14.00));
+
+		} catch (SavePizzaException e) {
+
+			System.out.println(e.getMessage());
+		}
 
 	}
 
@@ -51,7 +60,7 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @param Pizza
 	 */
 	@Override
-	public void saveNewPizza(Pizza pizza) {
+	public void saveNewPizza(Pizza pizza) throws SavePizzaException {
 
 		listPizza.add(pizza);
 
@@ -63,7 +72,7 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @param codePizza,pizza
 	 */
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza) {
+	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException {
 
 		for (int i = 0; i < listPizza.size(); i++) {
 			Pizza pizzo = (Pizza) listPizza.get(i);
@@ -82,7 +91,7 @@ public class PizzaMemDao implements IPizzaDao {
 	 * @param codePizza
 	 */
 	@Override
-	public void deletePizza(String codePizza) {
+	public void deletePizza(String codePizza) throws DeletePizzaException {
 
 		for (int i = 0; i < listPizza.size(); i++) {
 			Pizza pizzo = (Pizza) listPizza.get(i);

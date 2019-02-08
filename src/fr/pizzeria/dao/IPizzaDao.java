@@ -1,6 +1,7 @@
 package fr.pizzeria.dao;
 
 import java.util.List;
+import fr.pizzeria.exception.*;
 
 import fr.pizzeria.model.Pizza;
 /**
@@ -10,10 +11,10 @@ import fr.pizzeria.model.Pizza;
  */
 public interface IPizzaDao {
 
-	List<Pizza> findAllPizzas();
-	void saveNewPizza(Pizza pizza);
-	void updatePizza(String codePizza, Pizza pizza);
-	void deletePizza(String codePizza);
-	Pizza findPizzaByCode(String codePizza);
-	boolean pizzaExists(String codePizza);
+	public List<Pizza> findAllPizzas();
+	public void saveNewPizza(Pizza pizza) throws SavePizzaException;
+	public void updatePizza(String codePizza, Pizza pizza) throws UpdatePizzaException;
+	public void deletePizza(String codePizza) throws DeletePizzaException;
+	public Pizza findPizzaByCode(String codePizza);
+	public boolean pizzaExists(String codePizza);
 }

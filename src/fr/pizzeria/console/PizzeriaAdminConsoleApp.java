@@ -3,6 +3,7 @@ package fr.pizzeria.console;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.*;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.service.*;
 
 /**
@@ -12,7 +13,7 @@ import fr.pizzeria.service.*;
  */
 public class PizzeriaAdminConsoleApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws StockageException {
 
 		/* défintiions des variables */
 		int choix = 1; // pour la saisie de l'utilisateur
@@ -34,12 +35,18 @@ public class PizzeriaAdminConsoleApp {
 			System.out.println("4. Supprimer une pizza");
 			System.out.println("99. Sortir");
 			System.out.println("votre choix : \n");
-
 			/* Choix de service */
+
 			choix = choixUser.nextInt(); // saisie clavier par l'utilisateur
 			if ((choix > 0) && (choix < 5)) {
 				MenuService exec = User.choixService(choix);
-				exec.methodeUC(choixUser, pizzaDao);
+				try {
+					exec.methodeUC(choixUser, pizzaDao);
+
+				} catch (Exception e) {
+					System.out.println(e.getMessage());
+					choix = 99; // exit
+				}
 			}
 
 		}

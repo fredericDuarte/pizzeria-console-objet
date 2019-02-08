@@ -3,7 +3,8 @@ package fr.pizzeria.service;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.IPizzaDao;
-import fr.pizzeria.dao.PizzaMemDao;
+import fr.pizzeria.exception.DeletePizzaException;
+import fr.pizzeria.exception.StockageException;
 
 /**
  * Pour supprimer un pizza
@@ -20,18 +21,21 @@ public class SupprimerPizzaService extends MenuService {
 	 * 
 	 * @param read
 	 * @param dao
+	 * @throws StockageException
 	 */
 	@Override
-	public void methodeUC(Scanner read, IPizzaDao dao) {
+	public void methodeUC(Scanner read, IPizzaDao dao) throws DeletePizzaException {
 
 		System.out.println("Veuillez choisir le code de la pizza à supprimer.");
 		code = read.next();
 		// recherche le pizza demandé
-		if (dao.pizzaExists(code)) {
+		if (!dao.pizzaExists(code)) {
+			throw new DeletePizzaException("Code inexistant");
+		}
+
+		else {
 			dao.deletePizza(code);
 
-		} else {
-			System.out.println("Pizza inexistant");
 		}
 
 	}
