@@ -2,7 +2,7 @@ package fr.pizzeria.dao;
 
 import java.util.List;
 import fr.pizzeria.exception.*;
-
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 /**
  * 
@@ -17,4 +17,5 @@ public interface IPizzaDao {
 	public void deletePizza(String codePizza) throws DeletePizzaException;
 	public Pizza findPizzaByCode(String codePizza);
 	public boolean pizzaExists(String codePizza);
+	boolean catExist(CategoriePizza categoriePizza);
 }

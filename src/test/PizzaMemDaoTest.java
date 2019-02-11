@@ -8,6 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.dao.*;
 import fr.pizzeria.exception.DeletePizzaException;
@@ -21,7 +22,7 @@ class PizzaMemDaoTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		pizza = new Pizza("IND", "au jambon", 11);
+		pizza = new Pizza("IND", "au jambon", 11,CategoriePizza.SANS_VIANDE);
 
 	}
 
@@ -35,7 +36,7 @@ class PizzaMemDaoTest {
 		// vérifie si la liste des pizza est vide
 		assertTrue("Dao doit étre vide", dao.findAllPizzas().isEmpty());
 		// Ajout d un nouveau pizza
-		dao.saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50));
+		dao.saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50, CategoriePizza.SANS_VIANDE));
 		// vérifie que le code d'un pizza demandé n'est pas trouvé dans la liste
 		assertTrue("Je n'ai pas retouvé mon pizza", dao.findPizzaByCode("test").getLibbelle().equals(""));
 

@@ -5,6 +5,7 @@ import java.util.Scanner;
 import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 /**
  * Classe pour modifier un pizza
@@ -53,6 +54,16 @@ public class ModifierPizzaService extends MenuService {
 
 				throw new UpdatePizzaException("le prix doit être entre 1 et 20");
 			}
+			
+			System.out.println("Veuillez saisir le catégorie (VIANDE, SANS_VIANDE , POISSON ) :");
+			pizzaFind.setCat(CategoriePizza.valueOf(read.nextLine()));
+			
+			if(dao.catExist(pizzaFind.getCat()))
+			{
+
+				throw new UpdatePizzaException("catégorie inconnu");
+			}
+			
 			dao.updatePizza(code, pizzaFind);
 		
 

@@ -1,5 +1,6 @@
 package fr.pizzeria.service;
 
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 import fr.pizzeria.dao.*;
 import fr.pizzeria.exception.SavePizzaException;
@@ -23,7 +24,7 @@ public class AjouterPizzaService extends MenuService {
 	 */
 	@Override
 	public void methodeUC(Scanner read, IPizzaDao dao) throws SavePizzaException {
-		Pizza pizza = new Pizza(null, null, 0);
+		Pizza pizza = new Pizza(null, null, 0, CategoriePizza.SANS_VIANDE);
 
 		System.out.println("Veuillez saisir le code :");
 		pizza.setCode(read.next());
@@ -39,6 +40,20 @@ public class AjouterPizzaService extends MenuService {
 		}
 		System.out.println("Veuillez saisir le prix :");
 		pizza.setPrix(read.nextDouble());
+
+		if (pizza.getPrix() > 20) {
+
+			throw new SavePizzaException("le prix doit étre entre 1 à 20");
+		}
+
+		System.out.println("Veuillez saisir le catégorie (VIANDE, SANS_VIANDE , POISSON ) :");
+		pizza.setCat(CategoriePizza.valueOf(read.next()));
+
+
+		if (dao.catExist(pizza.getCat())) {
+
+			throw new SavePizzaException("catégorie inconnu");
+		}
 
 		if (pizza.getPrix() > 20) {
 

@@ -7,6 +7,7 @@ import java.util.List;
 import fr.pizzeria.exception.DeletePizzaException;
 import fr.pizzeria.exception.SavePizzaException;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 /**
@@ -27,14 +28,14 @@ public class PizzaMemDao implements IPizzaDao {
 		/* Ajouts des pizzas */
 
 		try {
-			saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50));
-			saveNewPizza(new Pizza(1, "MAR", "Margherita", 14.00));
-			saveNewPizza(new Pizza(2, "REIN", "La Reine", 11.50));
-			saveNewPizza(new Pizza(3, "FRO", "La 4 fromages", 12.00));
-			saveNewPizza(new Pizza(4, "CAN", "La cannibale", 12.50));
-			saveNewPizza(new Pizza(5, "SAV", "La savoyarde", 13.00));
-			saveNewPizza(new Pizza(6, "ORI", "L’orientale", 13.50));
-			saveNewPizza(new Pizza(7, "IND", "L’indienne", 14.00));
+			saveNewPizza(new Pizza(0, "PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
+			saveNewPizza(new Pizza(1, "MAR", "Margherita", 14.00, CategoriePizza.VIANDE));
+			saveNewPizza(new Pizza(2, "REIN", "La Reine", 11.50, CategoriePizza.SANS_VIANDE));
+			saveNewPizza(new Pizza(3, "FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
+			saveNewPizza(new Pizza(4, "CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
+			saveNewPizza(new Pizza(5, "SAV", "La savoyarde", 13.00, CategoriePizza.SANS_VIANDE));
+			saveNewPizza(new Pizza(6, "ORI", "L’orientale", 13.50, CategoriePizza.VIANDE));
+			saveNewPizza(new Pizza(7, "IND", "L’indienne", 14.00, CategoriePizza.VIANDE));
 
 		} catch (SavePizzaException e) {
 
@@ -139,6 +140,23 @@ public class PizzaMemDao implements IPizzaDao {
 				find = true;
 		}
 		return find;
+	}
+
+	/**
+	 * Vérifie si le catégorie existe
+	 * 
+	 * @param cat
+	 * @return boolean
+	 */
+	@Override
+	public boolean catExist(CategoriePizza cat) {
+		
+		for (CategoriePizza catFind : CategoriePizza.values()) {
+			if (catFind.equals(cat))
+				return true;
+		}
+
+		return false;
 	}
 
 }

@@ -24,7 +24,9 @@ public class ListerPizzaService extends MenuService {
 		
 		for (int i = 0; i < dao.findAllPizzas().size(); i++) {
 			Pizza pizzaCurrent = (Pizza) dao.findAllPizzas().get(i);
-			pizzaCurrent.affiche();
+			//pizzaCurrent.affiche();
+			pizzaCurrent.toString();
+			
 		}
 		read.nextLine(); // pause jusqu'à l'action par l'utilisateur
 		//throw new StockageException("");
